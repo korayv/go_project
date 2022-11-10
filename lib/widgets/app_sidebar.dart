@@ -21,7 +21,7 @@ class _AppSidebarState extends State<AppSidebar> {
       width: 240,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.secondary90,
+        color: AppColors.white,
         boxShadow: [
           BoxShadow(
             color: const Color(0xffE4E3E3).withOpacity(0.25),
@@ -37,17 +37,17 @@ class _AppSidebarState extends State<AppSidebar> {
           // Dashboard
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: indexContent == 0 ? AppColors.primary90: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              color: indexContent == 0 ? AppColors.primary10: Colors.transparent,
             ),
             child: ListTile(
               horizontalTitleGap: 16,
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               onTap: () {setIndexContent(0);},
               textColor: indexContent == 0 ? AppColors.primary90 : AppColors.blackText,
-              leading: Icon(
-                Icons.square,
-                color: indexContent == 0 ? AppColors.primary90 : AppColors.blackText,
+              leading: const Icon(
+                Icons.home,
+                color: AppColors.primary,
               ),
               title: Text(
                 "Panel",
@@ -64,17 +64,17 @@ class _AppSidebarState extends State<AppSidebar> {
           // Ürünler setIndexContent(1)
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: indexContent == 1 ? AppColors.primary90 : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              color: indexContent == 1 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
               horizontalTitleGap: 16,
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               onTap: () {setIndexContent(1);},
               textColor: indexContent == 1 ? AppColors.primary90 : AppColors.blackText,
-              leading: Icon(
-                Icons.people,
-                color: indexContent == 1 ? AppColors.primary90 : AppColors.blackText,
+              leading: const Icon(
+                Icons.list_alt_outlined,
+                color: AppColors.primary,
               ),
               title: Text(
                 "Ürünler",
@@ -91,17 +91,17 @@ class _AppSidebarState extends State<AppSidebar> {
           // Müşteriler
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: indexContent == 2 ? AppColors.primary90 : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              color: indexContent == 2 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
               horizontalTitleGap: 16,
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               onTap: () {setIndexContent(2);},
               textColor: indexContent == 2 ? AppColors.primary90 : AppColors.blackText,
-              leading: Icon(
+              leading: const Icon(
                 Icons.people,
-                color: indexContent == 2 ? AppColors.primary90 : AppColors.blackText,
+                color: AppColors.primary,
               ),
               title: Text(
                 "Müşteriler",
@@ -118,20 +118,20 @@ class _AppSidebarState extends State<AppSidebar> {
           // Satış Kanalları
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: indexContent == 3 ? AppColors.primary90 : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              color: indexContent == 3 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
               horizontalTitleGap: 16,
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               onTap: () {setIndexContent(3);},
               textColor: indexContent == 3 ? AppColors.primary90 : AppColors.blackText,
-              leading: Icon(
-                Icons.people,
-                color: indexContent == 3 ? AppColors.primary90 : AppColors.blackText,
+              leading: const Icon(
+                Icons.apartment,
+                color: AppColors.primary,
               ),
               title: Text(
-                "Sarış Kanalları",
+                "Satış Kanalları",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -144,17 +144,17 @@ class _AppSidebarState extends State<AppSidebar> {
           // Markalar
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: indexContent == 4 ? AppColors.primary90: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              color: indexContent == 4 ? AppColors.primary10: Colors.transparent,
             ),
             child: ListTile(
               horizontalTitleGap: 16,
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               onTap: () {setIndexContent(4);},
               textColor: indexContent == 4 ? AppColors.primary90 : AppColors.blackText,
-              leading: Icon(
-                Icons.qr_code_2,
-                color: indexContent == 4 ? AppColors.primary90 : AppColors.blackText,
+              leading: const Icon(
+                Icons.add_circle_outlined,
+                color: AppColors.primary,
               ),
               title: Text(
                 "Markalar",
