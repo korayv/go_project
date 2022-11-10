@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         color: AppColors.primary,
         width: 1,
         child: Row(
-          children: [const AppSidebar(), RightSide()],
+          children: const [AppSidebar(), RightSide()],
         ),
       ),
     );
@@ -60,32 +60,23 @@ class _RightSideState extends State<RightSide> {
     Function setIndexContent = Provider.of<States>(context).setIndexContent;
     int indexContent = Provider.of<States>(context).indexContent;
     return Expanded(
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [backgroundStartColor, backgroundEndColor],
-              stops: [0.0, 1.0]),
-        ),
-        child: Column(children: [
-          WindowTitleBarBox(
-            child: Row(
-              children: [Expanded(child: MoveWindow()), const WindowButtons()],
-            ),
+      child: Column(children: [
+        WindowTitleBarBox(
+          child: Row(
+            children: [Expanded(child: MoveWindow()), const WindowButtons()],
           ),
-          Expanded(child: contents[indexContent]),
-        ]),
-      ),
+        ),
+        Expanded(child: contents[indexContent]),
+      ]),
     );
   }
 }
 
 final buttonColors = WindowButtonColors(
-  iconNormal: AppColors.primary90,
+  iconNormal: AppColors.primary,
   mouseOver: AppColors.primary40,
-  mouseDown: AppColors.whiteBF,
-  iconMouseOver: AppColors.primary40,
+  mouseDown: AppColors.primary30,
+  iconMouseOver: AppColors.white,
   iconMouseDown: AppColors.whiteBF,
 );
 
