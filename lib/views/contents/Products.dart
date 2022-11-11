@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_project/widgets/app_form.dart';
 
 import '../../design/app_colors.dart';
 
@@ -41,7 +40,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
