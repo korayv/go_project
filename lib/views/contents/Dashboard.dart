@@ -141,7 +141,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
-    );
+    ]));
   }
 
   DataTable _createDataTable() {

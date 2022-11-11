@@ -124,7 +124,9 @@ class _QrGeneratorModalState extends State<QrGeneratorModal> {
               width: 16,
             ),
             ElevatedButton(onPressed: () {
-
+              if(amountController.text.isEmpty){
+                amountController.text='0';
+              }
               for(int i = 0;i<int.parse(amountController.text);i++){
                 int counter=i+1;
                 qr=generateCode(8);
