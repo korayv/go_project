@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:go_project/widgets/app_form.dart';
+import 'dart:math';
 
 class QrGeneratorModal extends StatefulWidget {
   const QrGeneratorModal({Key? key}) : super(key: key);
@@ -9,6 +12,16 @@ class QrGeneratorModal extends StatefulWidget {
 }
 
 class _QrGeneratorModalState extends State<QrGeneratorModal> {
+  String generateCode(int len) {
+    var r = Random();
+    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
+  String qr = '';
+  List<String> qrList =[];
+  TextEditingController amountController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -41,7 +54,7 @@ class _QrGeneratorModalState extends State<QrGeneratorModal> {
                           ),
                         ],
                       ),
-                      Text("ID:2Q5CE8")
+                      Text("ID:$qr")
                     ],
                   ),
                   Container(
@@ -69,10 +82,10 @@ class _QrGeneratorModalState extends State<QrGeneratorModal> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: AppForm.appTextFormField(
+                              child: AppForm.appTextFormFieldRegexNumber(
                                   label: "Miktar",
                                   hint: "",
-                                  controller: TextEditingController()),
+                                  controller: amountController, keyboardType: TextInputType.number, key: GlobalKey() ),
                             ),
                           ],
                         ),
@@ -110,7 +123,18 @@ class _QrGeneratorModalState extends State<QrGeneratorModal> {
             SizedBox(
               width: 16,
             ),
-            ElevatedButton(onPressed: () {}, child: Text("QR oluştur")),
+            ElevatedButton(onPressed: () {
+
+              for(int i = 0;i<int.parse(amountController.text);i++){
+                int counter=i+1;
+                qr=generateCode(8);
+                qrList.add(qr);
+                print("QR kod $counter: $qr");
+              }
+
+
+
+            }, child: Text("QR oluştur")),
           ],
         ),
       ],
