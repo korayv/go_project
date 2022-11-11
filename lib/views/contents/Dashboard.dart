@@ -171,7 +171,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           FittedBox(child: _createDataTable()),
         ],
       ),
-    ]));
+    );
   }
 
   DataTable _createDataTable() {
