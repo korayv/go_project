@@ -64,7 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     icon: const Icon(Icons.add, size: 20),
                     label: const Text("QR Kod Oluştur"),
                   ),
-                  ElevatedButton(
+                  /*ElevatedButton(
                     onPressed: () => {},
                     child: const Text("QR Kod Oluştur"),
                   ),
@@ -77,7 +77,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     icon: const Icon(Icons.add, size: 20),
                     label: const Text("QR Kod Oluştur"),
                   ),
-                  /*TextButton(
+                  TextButton(
                     onPressed: () => {},
                     child: const Text("QR Kod Oluştur"),
                   ),
