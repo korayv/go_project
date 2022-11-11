@@ -43,10 +43,39 @@ class _BrandsScreenState extends State<BrandsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Markalar", style: TextStyle(fontFamily: "Rubik", fontSize: 32),),
-              Container(
-                child: const Text("Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.", style: TextStyle(fontFamily: "Rubik", fontSize: 16,color: AppColors.gray),),
-              )
+              const Text(
+                "Markalar",
+                style: TextStyle(fontFamily: "Rubik", fontSize: 32),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Flexible(
+                    child: Text(
+                      "Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.",
+                      style: TextStyle(
+                          fontFamily: "Rubik",
+                          fontSize: 16,
+                          color: AppColors.gray),
+                      softWrap: false,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.file_download, size: 20),
+                    label: const Text("İçe Aktar"),
+                  ),
+                  const SizedBox(width: 16),
+                  OutlinedButton.icon(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.file_copy_sharp, size: 20),
+                    label: const Text("Dışa Aktar"),
+                  ),
+                ],
+              ),
             ],
           ),
           FittedBox(
