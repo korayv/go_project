@@ -5,6 +5,39 @@ import '../design/app_text.dart';
 
 
 class AppCards {
+  static Widget dasboardCard({
+    required Color color,
+    required String title,
+    required String content,
+    required void Function() onTap
+    }){
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          width: 220,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text( title, style: const TextStyle(fontFamily: "Rubik",fontSize: 16, color: AppColors.white),),
+              const SizedBox(height: 16),
+              Text( content, style: const TextStyle(fontFamily: "Rubik",fontSize: 32, color: AppColors.white),),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
   static Widget taskCard({
     required Color color,
     required String title,
