@@ -1,8 +1,7 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 
 import '../../design/app_colors.dart';
-import '../../widgets/app_sidebar.dart';
+
 
 class BrandsScreen extends StatefulWidget {
   const BrandsScreen({Key? key}) : super(key: key);
@@ -12,107 +11,104 @@ class BrandsScreen extends StatefulWidget {
 }
 
 class _BrandsScreenState extends State<BrandsScreen> {
+  final List<Map> _brands = [
+    {
+      'brand': "lc waikiki",
+      'productName': '100 TL FASHION KART',
+      'branch': 'Fashion',
+      'expiryDate': "22.10.22",
+      'usageCost': '350 TL',
+    },
+    {
+      'brand': "lc waikiki",
+      'productName': '100 TL FASHION KART',
+      'branch': 'Fashion',
+      'expiryDate': "22.10.22",
+      'usageCost': '350 TL',
+    },
+    {
+      'brand': "lc waikiki",
+      'productName': '100 TL FASHION KART',
+      'branch': 'Fashion',
+      'expiryDate': "22.10.22",
+      'usageCost': '350 TL',
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Markalar Page"),
-    );
-  }
-}
-const sidebarColor = AppColors.whiteBF;
-const backgroundStartColor = AppColors.whiteBF;
-const backgroundEndColor = AppColors.primary10;
-
-class LeftSide extends StatelessWidget {
-  LeftSide({Key? key}) : super(key: key);
-
-/*  Function setIndexContent = Provider.of<States>(context).setIndexContent;
-  int indexContent = Provider.of<States>(context).indexContent;*/
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        width: 200,
-        child: Container(
-            color: sidebarColor,
-            child: Column(
-              children: [
-                WindowTitleBarBox(child: MoveWindow()),
-                Expanded(child: AppSidebar())
-              ],
-            )));
-  }
-}
-
-class RightSide extends StatelessWidget {
-  const RightSide({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [backgroundStartColor, backgroundEndColor],
-              stops: [0.0, 1.0]),
-        ),
-        child: Column(children: [
-          WindowTitleBarBox(
-            child: Row(
-              children: [Expanded(child: MoveWindow()), const WindowButtons()],
-            ),
-          )
-        ]),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Markalar", style: TextStyle(fontFamily: "Rubik", fontSize: 32),),
+              Container(
+                child: const Text("Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.", style: TextStyle(fontFamily: "Rubik", fontSize: 16,color: AppColors.gray),),
+              )
+            ],
+          ),
+          FittedBox(
+            child: _createDataTable(),
+          ),
+        ],
       ),
     );
   }
-}
 
-final buttonColors = WindowButtonColors(
-  iconNormal: AppColors.primary90,
-  mouseOver: AppColors.primary40,
-  mouseDown: AppColors.whiteBF,
-  iconMouseOver: AppColors.primary40,
-  iconMouseDown: AppColors.whiteBF,
-);
-
-final closeButtonColors = WindowButtonColors(
-    mouseOver: const Color(0xFFD32F2F),
-    mouseDown: const Color(0xFFB71C1C),
-    iconNormal: AppColors.blackText,
-    iconMouseOver: Colors.white);
-
-class WindowButtons extends StatefulWidget {
-  const WindowButtons({Key? key}) : super(key: key);
-
-  @override
-  _WindowButtonsState createState() => _WindowButtonsState();
-}
-
-class _WindowButtonsState extends State<WindowButtons> {
-  void maximizeOrRestore() {
-    setState(() {
-      appWindow.maximizeOrRestore();
-    });
+  DataTable _createDataTable() {
+    return DataTable(
+        columns: _createColumns(),
+        rows: _createRows());
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MinimizeWindowButton(colors: buttonColors),
-        appWindow.isMaximized
-            ? RestoreWindowButton(
-          colors: buttonColors,
-          onPressed: maximizeOrRestore,
-        )
-            : MaximizeWindowButton(
-          colors: buttonColors,
-          onPressed: maximizeOrRestore,
-        ),
-        CloseWindowButton(colors: closeButtonColors),
+  List<DataColumn> _createColumns() {
+    return [
+      const DataColumn(label: Text('Marka', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Ürün Adı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Branşı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Kullanım Tarihi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Kullanım  Bedeli', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('İşlemler', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+    ];
+  }
+
+  List<DataRow> _createRows() {
+    return _brands
+        .map((brands) => DataRow(
+      cells: [
+        DataCell(Text(brands['brand'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text(brands['productName'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text(brands['branch'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text(brands['expiryDate'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text(brands['usageCost'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(
+            Container(
+              decoration: BoxDecoration(
+                  color: AppColors.primary1,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: AppColors.primary90)
+              ),
+              child: Row(
+                children: [
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: AppColors.primary90,)),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete, color: AppColors.primary90,)),
+                ],
+              ),
+            )),
       ],
-    );
+      color: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return AppColors.success90;
+            }
+            if (_brands.indexOf(brands).isEven) {
+              return AppColors.primary30;
+            }
+            return null;
+          }),
+    ))
+        .toList();
   }
 }

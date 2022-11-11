@@ -42,7 +42,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       body: ListView(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Markalar", style: TextStyle(fontFamily: "Rubik", fontSize: 32),),
+              Container(
+                child: const Text("Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.", style: TextStyle(fontFamily: "Rubik", fontSize: 16,color: AppColors.gray),),
+              ),
+               Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Text("Dasboard Screen"),
@@ -59,6 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Row(
                     children: [Icon(Icons.add), Text("QR oluştur")],
                   )),
+
             ],
           ),
           Container(
@@ -125,7 +133,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
           ),
-          _createDataTable(),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: FittedBox(
+              child: _createDataTable(),
+            ),
+          ),
         ],
       ),
     );
@@ -133,97 +146,57 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   DataTable _createDataTable() {
     return DataTable(
-        dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected))
-            return AppColors.danger90;
-          return AppColors.primary30; // Use the default value.
-        }),
         columns: _createColumns(),
         rows: _createRows());
   }
 
   List<DataColumn> _createColumns() {
     return [
-      const DataColumn(label: Text('Marka')),
-      const DataColumn(label: Text('Sipariş edilen Ürün Adı')),
-      const DataColumn(label: Text('Barkod')),
-      const DataColumn(label: Text('Sipariş Adedi')),
-      const DataColumn(label: Text('Satış Adedi')),
-      const DataColumn(label: Text('Toplam Satış')),
-      const DataColumn(label: Text('İşlemler')),
+      const DataColumn(label: Text('Marka', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Sipariş edilen Ürün Adı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Barkod', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Sipariş Adedi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Satış Adedi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('Toplam Satış', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(label: Text('İşlemler', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
     ];
   }
 
   List<DataRow> _createRows() {
     return _dashboard
         .map((dashboard) => DataRow(
-              cells: [
-                DataCell(Text(dashboard['brand'])),
-                DataCell(Text(dashboard['productName'])),
-                DataCell(Text(dashboard['barcode'])),
-                DataCell(Text(dashboard['deliveryCount'])),
-                DataCell(Text(dashboard['sellingCount'])),
-                DataCell(Text(dashboard['totalSelling'])),
-                DataCell(Row(
+        cells: [
+              DataCell(Text(dashboard['brand'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Text(dashboard['productName'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Text(dashboard['barcode'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Text(dashboard['deliveryCount'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Text(dashboard['sellingCount'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Text(dashboard['totalSelling'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+              DataCell(Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primary1,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: AppColors.primary90)
+                ),
+                child: Row(
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.delete)),
+                    IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: AppColors.primary90,)),
+                    IconButton(onPressed: (){}, icon: const Icon(Icons.delete, color: AppColors.primary90,)),
                   ],
-                )),
-              ],
-              /*color: MaterialStateProperty.resolveWith<Color?>(
+                ),
+              )),
+            ],
+         color: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return AppColors.success90;
             }
-            if (index.isEven) {
-              return AppColors.info;
+            if (_dashboard.indexOf(dashboard).isEven) {
+              return AppColors.primary30;
             }
             return null;
-          }),*/
-            ))
-        .toList();
+
+          }),
+    )) .toList();
   }
 }
-
-/*GridView.count(
-                    childAspectRatio: 3,
-                    padding: const EdgeInsets.all(24),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 24,
-                    children: List.generate(6, (index) {
-                      return InkWell(
-                        onTap: (){},
-                        child: Container(
-                          height: 100,
-                            decoration: BoxDecoration(
-                            color: AppColors.secondary,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text("Gelir", style: TextStyle(fontFamily: "Rubik",fontSize: 16, color: AppColors.white),),
-                              SizedBox(height: 16),
-                              Text(" 14.345", style: TextStyle(fontFamily: "Rubik",fontSize: 32, color: AppColors.white),),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    ),
-                  )*/
-/* color: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return AppColors.lightPrimary.withOpacity(0.5);
-        }
-        if (index.isEven) {
-          return AppColors.lightPrimary.withOpacity(0.08);
-        }
-        return null;
-      }),*/
