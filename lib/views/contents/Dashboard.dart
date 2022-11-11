@@ -115,11 +115,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   DataTable _createDataTable() {
     return DataTable(
-        dataRowColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected))
-            return AppColors.danger90;
-          return AppColors.primary30;  // Use the default value.
-        }),
         columns: _createColumns(),
         rows: _createRows());
   }
@@ -153,16 +148,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               )),
             ],
-         /*color: MaterialStateProperty.resolveWith<Color?>(
+         color: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return AppColors.success90;
             }
-            if (index.isEven) {
-              return AppColors.info;
+            if (_dashboard.indexOf(dashboard).isEven) {
+              return AppColors.primary30;
             }
             return null;
-          }),*/
+          }),
     ))
         .toList();
   }
