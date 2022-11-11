@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
+      theme: AppThemeData.lightTheme(context),
       /*AppThemeData.lightTheme(context),*/
       debugShowCheckedModeBanner: false,
       home: HomeScreen()

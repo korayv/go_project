@@ -21,8 +21,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Function setIndexContent = Provider.of<States>(context).setIndexContent;
-    int indexContent = Provider.of<States>(context).indexContent;
+    // Function setIndexContent = Provider.of<States>(context).setIndexContent;
+    // int indexContent = Provider.of<States>(context).indexContent;
     return Scaffold(
       body: WindowBorder(
         color: AppColors.primary,

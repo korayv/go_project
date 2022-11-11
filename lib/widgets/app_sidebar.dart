@@ -18,8 +18,8 @@ class _AppSidebarState extends State<AppSidebar> {
     int indexContent = Provider.of<States>(context).indexContent;
 
     return Container(
-      width: 240,
-      padding: const EdgeInsets.all(24),
+      width: 220,
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.white,
         boxShadow: [
@@ -41,133 +41,139 @@ class _AppSidebarState extends State<AppSidebar> {
               color: indexContent == 0 ? AppColors.primary10: Colors.transparent,
             ),
             child: ListTile(
-              horizontalTitleGap: 16,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               onTap: () {setIndexContent(0);},
-              textColor: indexContent == 0 ? AppColors.primary90 : AppColors.blackText,
+              // textColor: AppColors.blackText,
+              // textColor: indexContent == 0 ? AppColors.blackText : AppColors.blackText,
               leading: const Icon(
-                Icons.home,
+                Icons.home_outlined,
                 color: AppColors.primary,
               ),
-              title: Text(
+              title: const Text(
                 "Panel",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: indexContent == 0 ? AppColors.primary90 : AppColors.blackText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.3,
+                  color: AppColors.blackText,
+                  // color: indexContent == 0 ? AppColors.primary90 : AppColors.blackText,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          // Ürünler setIndexContent(1)
+          const SizedBox(height: 24),
+          // Products setIndexContent(1)
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: indexContent == 1 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
-              horizontalTitleGap: 16,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               onTap: () {setIndexContent(1);},
               textColor: indexContent == 1 ? AppColors.primary90 : AppColors.blackText,
               leading: const Icon(
                 Icons.list_alt_outlined,
                 color: AppColors.primary,
               ),
-              title: Text(
+              title: const Text(
                 "Ürünler",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: indexContent == 1 ? AppColors.primary90 : AppColors.blackText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.3,
+                  color: AppColors.blackText,
+                  // color: indexContent == 1 ? AppColors.primary90 : AppColors.blackText,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          // Müşteriler
+          const SizedBox(height: 24),
+          // Customers
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: indexContent == 2 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
-              horizontalTitleGap: 16,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               onTap: () {setIndexContent(2);},
               textColor: indexContent == 2 ? AppColors.primary90 : AppColors.blackText,
               leading: const Icon(
-                Icons.people,
+                Icons.people_outline,
                 color: AppColors.primary,
               ),
-              title: Text(
+              title: const Text(
                 "Müşteriler",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: indexContent == 2 ? AppColors.primary90 : AppColors.blackText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.3,
+                  color: AppColors.blackText,
+                  // color: indexContent == 2 ? AppColors.primary90 : AppColors.blackText,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
-          // Satış Kanalları
+          const SizedBox(height: 24),
+          // Distributions
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: indexContent == 3 ? AppColors.primary10 : Colors.transparent,
             ),
             child: ListTile(
-              horizontalTitleGap: 16,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               onTap: () {setIndexContent(3);},
               textColor: indexContent == 3 ? AppColors.primary90 : AppColors.blackText,
               leading: const Icon(
                 Icons.apartment,
                 color: AppColors.primary,
               ),
-              title: Text(
+              title: const Text(
                 "Satış Kanalları",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: indexContent == 3 ? AppColors.primary90 : AppColors.blackText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.3,
+                  color: AppColors.blackText,
+                  // color: indexContent == 3 ? AppColors.primary90 : AppColors.blackText,
                 ),
               ),
             ),
           ),
-          // Markalar
+          const SizedBox(height: 24),
+          // Brands
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: indexContent == 4 ? AppColors.primary10: Colors.transparent,
             ),
             child: ListTile(
-              horizontalTitleGap: 16,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               onTap: () {setIndexContent(4);},
               textColor: indexContent == 4 ? AppColors.primary90 : AppColors.blackText,
               leading: const Icon(
-                Icons.add_circle_outlined,
+                Icons.add_circle_outline,
                 color: AppColors.primary,
               ),
-              title: Text(
+              title: const Text(
                 "Markalar",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.4,
-                  color: indexContent == 4 ? AppColors.primary90 : AppColors.blackText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.3,
+                  color: AppColors.blackText,
+                  // color: indexContent == 4 ? AppColors.primary90 : AppColors.blackText,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
         ],
       ),
     );
