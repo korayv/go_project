@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
 import 'package:go_project/widgets/app_cards.dart';
+import 'package:go_project/widgets/qr_generator_modal.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -48,7 +48,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const Text("Markalar", style: TextStyle(fontFamily: "Rubik", fontSize: 32),),
               Container(
                 child: const Text("Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.", style: TextStyle(fontFamily: "Rubik", fontSize: 16,color: AppColors.gray),),
-              )
+              ),
+               Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Text("Dasboard Screen"),
+              ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return
+                            QrGeneratorModal();
+
+                        });
+                  },
+                  child: Row(
+                    children: [Icon(Icons.add), Text("QR oluştur")],
+                  )),
+
             ],
           ),
           Container(
@@ -177,48 +195,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return AppColors.primary30;
             }
             return null;
+
           }),
-    ))
-        .toList();
+    )) .toList();
   }
 }
-
-/*GridView.count(
-                    childAspectRatio: 3,
-                    padding: const EdgeInsets.all(24),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 24,
-                    children: List.generate(6, (index) {
-                      return InkWell(
-                        onTap: (){},
-                        child: Container(
-                          height: 100,
-                            decoration: BoxDecoration(
-                            color: AppColors.secondary,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text("Gelir", style: TextStyle(fontFamily: "Rubik",fontSize: 16, color: AppColors.white),),
-                              SizedBox(height: 16),
-                              Text(" 14.345", style: TextStyle(fontFamily: "Rubik",fontSize: 32, color: AppColors.white),),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    ),
-                  )*/
-/* color: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return AppColors.lightPrimary.withOpacity(0.5);
-        }
-        if (index.isEven) {
-          return AppColors.lightPrimary.withOpacity(0.08);
-        }
-        return null;
-      }),*/
