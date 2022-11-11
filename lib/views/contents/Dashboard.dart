@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
 import 'package:go_project/widgets/app_cards.dart';
+import 'package:go_project/widgets/qr_generator_modal.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -42,7 +42,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       body: ListView(
         children: [
-          const Text("Dasboard Screen"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Text("Dasboard Screen"),
+              ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return
+                            QrGeneratorModal();
+
+                        });
+                  },
+                  child: Row(
+                    children: [Icon(Icons.add), Text("QR oluştur")],
+                  )),
+            ],
+          ),
           Container(
             padding: const EdgeInsets.all(12),
             //color: AppColors.warning,
@@ -115,10 +133,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   DataTable _createDataTable() {
     return DataTable(
-        dataRowColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+        dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
           if (states.contains(MaterialState.selected))
             return AppColors.danger90;
-          return AppColors.primary30;  // Use the default value.
+          return AppColors.primary30; // Use the default value.
         }),
         columns: _createColumns(),
         rows: _createRows());
@@ -139,21 +158,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<DataRow> _createRows() {
     return _dashboard
         .map((dashboard) => DataRow(
-        cells: [
-              DataCell(Text(dashboard['brand'])),
-              DataCell(Text(dashboard['productName'])),
-              DataCell(Text(dashboard['barcode'])),
-              DataCell(Text(dashboard['deliveryCount'])),
-              DataCell(Text(dashboard['sellingCount'])),
-              DataCell(Text(dashboard['totalSelling'])),
-              DataCell(Row(
-                children: [
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.edit)),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete)),
-                ],
-              )),
-            ],
-         /*color: MaterialStateProperty.resolveWith<Color?>(
+              cells: [
+                DataCell(Text(dashboard['brand'])),
+                DataCell(Text(dashboard['productName'])),
+                DataCell(Text(dashboard['barcode'])),
+                DataCell(Text(dashboard['deliveryCount'])),
+                DataCell(Text(dashboard['sellingCount'])),
+                DataCell(Text(dashboard['totalSelling'])),
+                DataCell(Row(
+                  children: [
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.delete)),
+                  ],
+                )),
+              ],
+              /*color: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
             if (states.contains(MaterialState.selected)) {
               return AppColors.success90;
@@ -163,7 +183,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             }
             return null;
           }),*/
-    ))
+            ))
         .toList();
   }
 }

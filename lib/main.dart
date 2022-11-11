@@ -1,6 +1,7 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
+import 'package:go_project/design/app_theme_data.dart';
 import 'package:go_project/states/states.dart';
 import 'package:go_project/views/home.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ void main() {
     win.show();
   });
 }
+
 const borderColor = AppColors.primary90;
 
 class MyApp extends StatelessWidget {
@@ -30,14 +32,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen()
-    );
+        // theme: AppThemeData.lightTheme(context),
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen());
   }
 }
-
-
 
 /*class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: snapshot.data == null ? const Login() : const Home(),
       initialRoute: "dashboard_view",
-      *//*initialRoute: snapshot.data == null ? "login_view" : "home_view",*//*
+      */ /*initialRoute: snapshot.data == null ? "login_view" : "home_view",*/ /*
       routes: routes,
       //supportedLocales: const [Locale("en", "US"), Locale("tr", "TR")],
     );
