@@ -5,6 +5,8 @@ import 'package:go_project/states/states.dart';
 import 'package:go_project/views/home.dart';
 import 'package:provider/provider.dart';
 
+import 'design/app_theme_data.dart';
+
 void main() {
   runApp(
     ChangeNotifierProvider<States>(
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
+      /*AppThemeData.lightTheme(context),*/
       debugShowCheckedModeBanner: false,
       home: HomeScreen()
     );
