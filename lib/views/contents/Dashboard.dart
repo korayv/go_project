@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
 import 'package:go_project/widgets/app_cards.dart';
-
 import '../../widgets/qr_generator_modal.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -38,9 +37,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       'totalSelling': '34,000 TL',
     },
   ];
+  DateTimeRange dateRange = DateTimeRange(start: DateTime(2022,11,5), end: DateTime(2022,12,24));
 
   @override
   Widget build(BuildContext context) {
+    final start = dateRange.start;
+    final end = dateRange.end;
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(24),
@@ -49,44 +51,63 @@ class _DashboardScreenState extends State<DashboardScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text("Tarih Seçme Butonları Burada Olacak"),
+              //DatePicker Component
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const QrGeneratorModal();
-                        },
-                      );
-                    },
-                    icon: const Icon(Icons.add, size: 20),
-                    label: const Text("QR Kod Oluştur"),
+                  InkWell(
+                    onTap: pickDateRange,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: AppColors.primary60)
+                      ),
+                      child: Row(
+                        children: [
+                          Text("   ${start.day}/${start.month}/${start.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.white),),
+                          const SizedBox(width: 8),
+                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.white, size: 16)
+                        ],
+                      ),
+                    ),
                   ),
-                  /*ElevatedButton(
-                    onPressed: () => {},
-                    child: const Text("QR Kod Oluştur"),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.event, color: AppColors.primary),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: pickDateRange,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: AppColors.primary60)
+                      ),
+                      child: Row(
+                        children: [
+                          Text("   ${end.day}/${end.month}/${end.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.white)),
+                          const SizedBox(width: 8),
+                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.white, size: 16)
+                        ],
+                      ),
+                    ),
                   ),
-                  OutlinedButton(
-                    onPressed: () => {},
-                    child: const Text("QR Kod Oluştur"),
-                  ),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.add, size: 20),
-                    label: const Text("QR Kod Oluştur"),
-                  ),
-                  TextButton(
-                    onPressed: () => {},
-                    child: const Text("QR Kod Oluştur"),
-                  ),
-                  TextButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.add, size: 20),
-                    label: const Text("QR Kod Oluştur"),
-                  ),*/
                 ],
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const QrGeneratorModal();
+                    },
+                  );
+                },
+                icon: const Icon(Icons.add, size: 20),
+                label: const Text("QR Kod Oluştur"),
               ),
             ],
           ),
@@ -172,6 +193,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
     );
+  }
+
+  Future pickDateRange() async {
+    DateTimeRange? newDateRange = await showDateRangePicker(
+        context: context,
+        initialDateRange: dateRange,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100),
+      /*builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.red, // <-- SEE HERE
+              onPrimary: Colors.red, // <-- SEE HERE
+              onSurface: Colors.red, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.red, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },*/
+    );
+
+    if(newDateRange == null) return;
+    setState(() {
+      dateRange = newDateRange;
+    });
   }
 
   DataTable _createDataTable() {
@@ -340,3 +392,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .toList();
   }
 }
+
+/*ElevatedButton(
+                    onPressed: () => {},
+                    child: const Text("QR Kod Oluştur"),
+                  ),
+                  OutlinedButton(
+                    onPressed: () => {},
+                    child: const Text("QR Kod Oluştur"),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.add, size: 20),
+                    label: const Text("QR Kod Oluştur"),
+                  ),
+                  TextButton(
+                    onPressed: () => {},
+                    child: const Text("QR Kod Oluştur"),
+                  ),
+                  TextButton.icon(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.add, size: 20),
+                    label: const Text("QR Kod Oluştur"),
+                  ),*/
