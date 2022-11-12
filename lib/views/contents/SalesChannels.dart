@@ -37,6 +37,7 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
       'totalSelling': '68,000 TL',
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +47,15 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Satış kanalları",
-                style: TextStyle(fontFamily: "Rubik", fontSize: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Satış Kanalları",
+                    style: TextStyle(fontSize: 32),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Row(
@@ -56,34 +63,37 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
                 children: [
                   const Flexible(
                     child: Text(
-                      "Buradan toplu satılan ürün raporunu oluşturabilir, ürünlerin satışlarının hangi kanallar üzerinde ne değerde yapıldığını görüntüleyebilirsiniz.",
+                      "Buradan toplu satılan ürün raporunu oluşturabilir, ürünlerin satışlarının hangi \nkanallar üzerinde ne değerde yapıldığını görüntüleyebilirsiniz.",
                       style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 16,
-                          color: AppColors.gray),
-                      softWrap: false,
+                        fontSize: 16,
+                        color: AppColors.gray,
+                      ),
+                      // softWrap: false,
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_download, size: 20),
-                    label: const Text("İçe Aktar"),
-                  ),
-                  const SizedBox(width: 16),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_copy_sharp, size: 20),
-                    label: const Text("Dışa Aktar"),
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_download_outlined, size: 20),
+                        label: const Text("İçe Aktar"),
+                      ),
+                      const SizedBox(width: 16),
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_copy_outlined, size: 20),
+                        label: const Text("Dışa Aktar"),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-          FittedBox(
-            child: _createDataTable(),
-          ),
+          const SizedBox(height: 24),
+          FittedBox(child: _createDataTable()),
         ],
       ),
     );
@@ -98,13 +108,69 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
 
   List<DataColumn> _createColumns() {
     return [
-      const DataColumn(label: Text('Marka', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Sipariş edilen Ürün Adı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Barkod', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Sipariş Adedi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Satış Adedi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Toplam Satış', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('İşlemler', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(
+        label: Text(
+          'Marka',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Sipariş Edilen Ürün Adı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Barkod',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Sipariş Adedi',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Satış Adedi',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Toplam Satış',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'İşlemler',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     ];
   }
 

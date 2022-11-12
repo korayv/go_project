@@ -34,6 +34,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
       'usageCost': '350 TL',
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +44,15 @@ class _BrandsScreenState extends State<BrandsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Markalar",
-                style: TextStyle(fontFamily: "Rubik", fontSize: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Markalar",
+                    style: TextStyle(fontSize: 32),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Row(
@@ -53,34 +60,37 @@ class _BrandsScreenState extends State<BrandsScreen> {
                 children: [
                   const Flexible(
                     child: Text(
-                      "Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım gerçekleşmiş bu tür bilgiler raporlanır.",
+                      "Daha önce hangi markada indirim kartımız kulanılmış ve ne zaman bu kullanım \ngerçekleşmiş bu tür bilgiler raporlanır.",
                       style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 16,
-                          color: AppColors.gray),
-                      softWrap: false,
+                        fontSize: 16,
+                        color: AppColors.gray,
+                      ),
+                      // softWrap: false,
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_download, size: 20),
-                    label: const Text("İçe Aktar"),
-                  ),
-                  const SizedBox(width: 16),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_copy_sharp, size: 20),
-                    label: const Text("Dışa Aktar"),
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_download_outlined, size: 20),
+                        label: const Text("İçe Aktar"),
+                      ),
+                      const SizedBox(width: 16),
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_copy_outlined, size: 20),
+                        label: const Text("Dışa Aktar"),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-          FittedBox(
-            child: _createDataTable(),
-          ),
+          const SizedBox(height: 24),
+          FittedBox(child: _createDataTable()),
         ],
       ),
     );
@@ -94,12 +104,60 @@ class _BrandsScreenState extends State<BrandsScreen> {
 
   List<DataColumn> _createColumns() {
     return [
-      const DataColumn(label: Text('Marka', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Ürün Adı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Branşı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Kullanım Tarihi', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Kullanım  Bedeli', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('İşlemler', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(
+        label: Text(
+          'Marka',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Ürün Adı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Branşı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Kullanım Tarihi',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Kullanım Bedeli',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'İşlemler',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     ];
   }
 

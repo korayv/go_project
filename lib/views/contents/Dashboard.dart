@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       'totalSelling': '34,000 TL',
     },
   ];
-  DateTimeRange dateRange = DateTimeRange(start: DateTime(2022,11,5), end: DateTime(2022,12,24));
+  DateTimeRange dateRange = DateTimeRange(start: DateTime.now(), end: DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -59,38 +59,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   InkWell(
                     onTap: pickDateRange,
                     child: Container(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        // color: AppColors.primary,
                         borderRadius: BorderRadius.circular(4),
                         border: Border.all(color: AppColors.primary60)
                       ),
                       child: Row(
                         children: [
-                          Text("   ${start.day}/${start.month}/${start.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.white),),
+                          Text("${start.day}/${start.month}/${start.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.primary,),),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.white, size: 16)
+                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primary, size: 16,)
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.event, color: AppColors.primary),
+                  const Icon(Icons.calendar_month_outlined, color: AppColors.primary),
                   const SizedBox(width: 8),
                   InkWell(
                     onTap: pickDateRange,
                     child: Container(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                          color: AppColors.primary,
+                          // color: AppColors.primary,
                           borderRadius: BorderRadius.circular(4),
                           border: Border.all(color: AppColors.primary60)
                       ),
                       child: Row(
                         children: [
-                          Text("   ${end.day}/${end.month}/${end.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.white)),
+                          Text("${end.day}/${end.month}/${end.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.primary,)),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.white, size: 16)
+                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primary, size: 16,)
                         ],
                       ),
                     ),
@@ -201,23 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         initialDateRange: dateRange,
         firstDate: DateTime(1900),
         lastDate: DateTime(2100),
-      /*builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.red, // <-- SEE HERE
-              onPrimary: Colors.red, // <-- SEE HERE
-              onSurface: Colors.red, // <-- SEE HERE
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                primary: Colors.red, // button text color
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },*/
+        saveText: "Değişiklikleri Kaydet",
     );
 
     if(newDateRange == null) return;

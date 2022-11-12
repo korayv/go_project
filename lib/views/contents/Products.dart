@@ -47,20 +47,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Oluşturulan kartlar",
-                    style: TextStyle(fontFamily: "Rubik", fontSize: 32),
+                  const Text(
+                    "Oluşturulan Kartlar",
+                    style: TextStyle(fontSize: 32),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Text("");
-                        },
-                      );
-                    },
+                    onPressed: () {},
                     icon: const Icon(Icons.add, size: 20),
                     label: const Text("Yeni Ürün Ekle"),
                   ),
@@ -72,34 +66,37 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 children: [
                   const Flexible(
                     child: Text(
-                      "Products kısmından üretilen ürünler hakkında rapor oluşturabilir ve yeni barkoda sahip yeni ürünler oluşturulabilir.",
+                      "Products kısmından üretilen ürünler hakkında rapor oluşturabilir ve yeni barkoda \nsahip yeni ürünler oluşturabilirsiniz.",
                       style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 16,
-                          color: AppColors.gray),
-                      softWrap: false,
+                        fontSize: 16,
+                        color: AppColors.gray,
+                      ),
+                      // softWrap: false,
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_download, size: 20),
-                    label: const Text("İçe Aktar"),
-                  ),
-                  const SizedBox(width: 16),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_copy_sharp, size: 20),
-                    label: const Text("Dışa Aktar"),
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_download_outlined, size: 20),
+                        label: const Text("İçe Aktar"),
+                      ),
+                      const SizedBox(width: 16),
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_copy_outlined, size: 20),
+                        label: const Text("Dışa Aktar"),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-          FittedBox(
-            child: _createDataTable(),
-          ),
+          const SizedBox(height: 24),
+          FittedBox(child: _createDataTable()),
         ],
       ),
     );
@@ -112,40 +109,68 @@ class _ProductsScreenState extends State<ProductsScreen> {
   List<DataColumn> _createColumns() {
     return [
       const DataColumn(
-          label: Text(
-        'Ürün Adı',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Ürün Adı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'Barkod',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Barkod',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'Branşı',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Branşı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'Ürün Adedi',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Ürün Adedi',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'Değeri',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Değeri',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'Tarihi',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'Tarihi',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       const DataColumn(
-          label: Text(
-        'İşlemler',
-        style: TextStyle(fontFamily: "Rubik", fontSize: 16),
-      )),
+        label: Text(
+          'İşlemler',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     ];
   }
 

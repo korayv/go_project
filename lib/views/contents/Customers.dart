@@ -34,6 +34,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
       'status': 'Henüz kullanılmadı',
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +44,15 @@ class _CustomersScreenState extends State<CustomersScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Müşteriler",
-                style: TextStyle(fontFamily: "Rubik", fontSize: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Müşteriler",
+                    style: TextStyle(fontSize: 32),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Row(
@@ -53,34 +60,37 @@ class _CustomersScreenState extends State<CustomersScreen> {
                 children: [
                   const Flexible(
                     child: Text(
-                      "Müşteriler kısmından ürünü  satın alanların raporunu oluşturabilirsiniz. Ayrıca müşterilere ait bilgileri düzenleyebilir ve elle müdahale sağlayabilirsiniz.",
+                      "Müşteriler kısmından ürünü  satın alanların raporunu oluşturabilirsiniz. Ayrıca  \nmüşterilere ait bilgileri düzenleyebilir ve elle müdahale sağlayabilirsiniz.",
                       style: TextStyle(
-                          fontFamily: "Rubik",
-                          fontSize: 16,
-                          color: AppColors.gray),
-                      softWrap: false,
+                        fontSize: 16,
+                        color: AppColors.gray,
+                      ),
+                      // softWrap: false,
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      // overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_download, size: 20),
-                    label: const Text("İçe Aktar"),
-                  ),
-                  const SizedBox(width: 16),
-                  OutlinedButton.icon(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.file_copy_sharp, size: 20),
-                    label: const Text("Dışa Aktar"),
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_download_outlined, size: 20),
+                        label: const Text("İçe Aktar"),
+                      ),
+                      const SizedBox(width: 16),
+                      OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.file_copy_outlined, size: 20),
+                        label: const Text("Dışa Aktar"),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-          FittedBox(
-            child: _createDataTable(),
-          ),
+          const SizedBox(height: 24),
+          FittedBox(child: _createDataTable()),
         ],
       ),
     );
@@ -94,12 +104,60 @@ class _CustomersScreenState extends State<CustomersScreen> {
 
   List<DataColumn> _createColumns() {
     return [
-      const DataColumn(label: Text('Cep numarası', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Satin aldığı ürün', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Barkod', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Kullanıcı adı', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('Kullanım durumu', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-      const DataColumn(label: Text('İşlemler', style: TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+      const DataColumn(
+        label: Text(
+          'Cep Numarası',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Satın Aldığı Ürün',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Barkod',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Kullanıcı Adı',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'Kullanım Durumu',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      const DataColumn(
+        label: Text(
+          'İşlemler',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     ];
   }
 
