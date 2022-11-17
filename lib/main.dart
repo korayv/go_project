@@ -8,7 +8,28 @@ import 'package:provider/provider.dart';
 
 import 'design/app_theme_data.dart';
 
-void main() {
+//Bu paket sayesinde bağlantı kuruluyor
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //backende connection kısmı
+  final keyApplicationId = 'q7wHH3k3GJtgQvfDJpIncqfR9O0pWtkk9V12GBDI';
+  final keyClientKey = 'O7o9rJmtLtj6BS1SsmcQzuWEoowUsdVLmVckTuAG';
+  final keyParseServerUrl = 'https://parseapi.back4app.com';
+
+  await Parse().initialize(keyApplicationId, keyParseServerUrl,
+      clientKey: keyClientKey, debug: true);
+  //connection kısım bitiş
+
+  //Back4App için istek örneği ve çalışıyor kontrol ettim databasede yeni class-table oluşturmuş
+  var firstObject = ParseObject('FirstClass')
+    ..set(
+        'message', 'Hey ! First message from Flutter. Parse is now connected');
+  await firstObject.save();
+  print('done');
+  //Buraya kadar olan kısım istek atma kısmı
+
   runApp(
     ChangeNotifierProvider<States>(
       create: (BuildContext context) => States(),
