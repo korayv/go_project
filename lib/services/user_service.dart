@@ -1,47 +1,40 @@
 import 'package:go_project/models/user.dart';
 import "package:parse_server_sdk/parse_server_sdk.dart";
 
+import 'base_service.dart';
+
 class UserService {
-
-  static Future<void> saveUser(User user) async {
-    final body = ParseObject('customers')
-      ..set('firstName', user.firstName)
-      ..set("lastName", user.lastName)
-      ..set("phoneNumber", user.email)
-      ..set("verification", user.password)
-      ..set("createdAt", user.createdAt)
-      ..set("updatedAt", user.updatedAt);
-    await body.save();
+  static Future<List<dynamic>?> getAllUsers() async {
+    return BaseService.getRequest('Users');
   }
 
-  static Future<List<ParseObject>> getUsers() async {
-    QueryBuilder<ParseObject> queryTodo =
-    QueryBuilder<ParseObject>(ParseObject('customers'));
-    final ParseResponse apiResponse = await queryTodo.query();
+  static Future<List<dynamic>?> addUser(User newUser) async {
+    final object = ParseObject('Users');
 
-    if (apiResponse.success && apiResponse.results != null) {
-      return apiResponse.results as List<ParseObject>;
-    } else {
-      return [];
-    }
+    object.set('firstName', newUser.firstName);
+    object.set('lastName', newUser.lastName);
+    object.set('email', newUser.email);
+    object.set('password', newUser.password);
+
+    return BaseService.postRequest(object);
   }
 
-  static Future<void> updateUser(String objectId,User user) async {
-    var body = ParseObject('customers')
-      ..objectId = objectId
-      ..set('firstName', user.firstName)
-      ..set("lastName", user.lastName)
-      ..set("phoneNumber", user.email)
-      ..set("verification", user.password)
-      ..set("createdAt", user.createdAt)
-      ..set("updatedAt", user.updatedAt);
+  static Future<List<dynamic>?> updateUser(User uUser, String id) async {
+    final object = ParseObject('Users');
+    object.objectId = id;
 
-    await body.save();
+    object.set('firstName', uUser.firstName);
+    object.set('lastName', uUser.lastName);
+    object.set('email', uUser.email);
+    object.set('password', uUser.password);
+
+    return BaseService.putRequest(object);
   }
 
-  static Future<void> deleteUser(String objectId) async {
-    var body = ParseObject('customers')..objectId = objectId;
-    await body.delete();
-  }
+  static Future<List<dynamic>?> deleteUser(String id) async {
+    final object = ParseObject('Users');
+    object.objectId = id;
 
+    return BaseService.deleteRequest(object);
+  }
 }

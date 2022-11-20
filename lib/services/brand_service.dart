@@ -19,45 +19,23 @@ class BrandService {
     return BaseService.postRequest(object);
   }
 
-  // static Future<void> saveBrand(Brand brand) async {
-  //   final body = ParseObject('brands')
-  //     ..set('brandName', brand.name)
-  //     ..set("brandLogo", brand.logo)
-  //     ..set("brandAdress", brand.adress)
-  //     ..set("branch", brand.branch)
-  //     ..set("phoneNumber", brand.phoneNumber)
-  //     ..set("createdAt", brand.createdAt)
-  //     ..set("updatedAt", brand.updatedAt);
-  //   await body.save();
-  // }
+  static Future<List<dynamic>?> updateBrand(Brand uBrand, String id) async {
+    final object = ParseObject('Brands');
+    object.objectId = id;
 
-  // static Future<List<ParseObject>> getBrands() async {
-  //   QueryBuilder<ParseObject> queryBrands =
-  //   QueryBuilder<ParseObject>(ParseObject('brands'));
-  //   final ParseResponse apiResponse = await queryBrands.query();
-  //   if (apiResponse.success && apiResponse.results != null) {
-  //     return apiResponse.results as List<ParseObject>;
-  //   } else {
-  //     return [];
-  //   }
-  // }
+    object.set('name', uBrand.name);
+    object.set('logo', uBrand.logo);
+    object.set('address', uBrand.address);
+    object.set('branch', uBrand.branch);
+    object.set('phoneNumber', uBrand.phoneNumber);
 
-  // static Future<void> updateBrand(String objectId,Brand brand) async {
-  //   var body = ParseObject('brands')
-  //     ..objectId = objectId
-  //     ..set('brandName', brand.name)
-  //     ..set("brandLogo", brand.logo)
-  //     ..set("brandAdress", brand.adress)
-  //     ..set("branch", brand.branch)
-  //     ..set("phoneNumber", brand.phoneNumber)
-  //     ..set("createdAt", brand.createdAt)
-  //     ..set("updatedAt", brand.updatedAt);
+    return BaseService.putRequest(object);
+  }
 
-  //   await body.save();
-  // }
+  static Future<List<dynamic>?> deleteBrand(String id) async {
+    final object = ParseObject('Brands');
+    object.objectId = id;
 
-  // static Future<void> deleteBrand(String objectId) async {
-  //   var body = ParseObject('brands')..objectId = objectId;
-  //   await body.delete();
-  // }
+    return BaseService.deleteRequest(object);
+  }
 }

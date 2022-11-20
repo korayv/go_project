@@ -1,49 +1,44 @@
 import 'package:go_project/models/discount_code.dart';
 import "package:parse_server_sdk/parse_server_sdk.dart";
 
+import 'base_service.dart';
+
 class DiscountCodeService {
-
-  static Future<void> saveDiscountCode(DiscountCode discountCode) async {
-    final body = ParseObject('discountCodes')
-      ..set('discountCode', discountCode.discountCode)
-      ..set("discountAmount", discountCode.discountAmount)
-      ..set("brand", discountCode.brand)
-      ..set("product", discountCode.product)
-      ..set("customer", discountCode.customer)
-      ..set("createdAt", discountCode.createdAt)
-      ..set("updatedAt", discountCode.updatedAt);
-    await body.save();
+  static Future<List<dynamic>?> getAllDiscountCodes() async {
+    return BaseService.getRequest('DiscountCodes');
   }
 
-  static Future<List<ParseObject>> getDiscountCodes() async {
-    QueryBuilder<ParseObject> queryTodo =
-    QueryBuilder<ParseObject>(ParseObject('discountCodes'));
-    final ParseResponse apiResponse = await queryTodo.query();
+  static Future<List<dynamic>?> addDiscountCode(
+      DiscountCode newDiscountCode) async {
+    final object = ParseObject('DiscountCodes');
 
-    if (apiResponse.success && apiResponse.results != null) {
-      return apiResponse.results as List<ParseObject>;
-    } else {
-      return [];
-    }
+    object.set('discountCode', newDiscountCode.discountCode);
+    object.set('discountAmount', newDiscountCode.discountAmount);
+    object.set('brand', newDiscountCode.brand);
+    object.set('product', newDiscountCode.product);
+    object.set('customer', newDiscountCode.customer);
+
+    return BaseService.postRequest(object);
   }
 
-  static Future<void> updateDiscountCode(String objectId,DiscountCode discountCode) async {
-    var body = ParseObject('discountCodes')
-      ..objectId = objectId
-      ..set('discountCode', discountCode.discountCode)
-      ..set("discountAmount", discountCode.discountAmount)
-      ..set("brand", discountCode.brand)
-      ..set("product", discountCode.product)
-      ..set("customer", discountCode.customer)
-      ..set("createdAt", discountCode.createdAt)
-      ..set("updatedAt", discountCode.updatedAt);
+  static Future<List<dynamic>?> updateDiscountCode(
+      DiscountCode uDiscountCode, String id) async {
+    final object = ParseObject('DiscountCodes');
+    object.objectId = id;
 
-    await body.save();
+    object.set('discountCode', uDiscountCode.discountCode);
+    object.set('discountAmount', uDiscountCode.discountAmount);
+    object.set('brand', uDiscountCode.brand);
+    object.set('product', uDiscountCode.product);
+    object.set('customer', uDiscountCode.customer);
+
+    return BaseService.putRequest(object);
   }
 
-  static Future<void> deleteDiscountCode(String objectId) async {
-    var body = ParseObject('discountCodes')..objectId = objectId;
-    await body.delete();
-  }
+  static Future<List<dynamic>?> deleteDiscountCode(String id) async {
+    final object = ParseObject('DiscountCodes');
+    object.objectId = id;
 
+    return BaseService.deleteRequest(object);
+  }
 }

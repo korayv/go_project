@@ -20,48 +20,24 @@ class CustomerService {
     return BaseService.postRequest(object);
   }
 
-  // static Future<void> saveCustomer(Customer customer) async {
-  //   final body = ParseObject('customers')
-  //     ..set('firstName', customer.firstName)
-  //     ..set("lastName", customer.lastName)
-  //     ..set("phoneNumber", customer.phoneNumber)
-  //     ..set("verification", customer.verification)
-  //     ..set("discountCodes", customer.discountCodes)
-  //     ..set("code", customer.code)
-  //     ..set("createdAt", customer.createdAt)
-  //     ..set("updatedAt", customer.updatedAt);
-  //   await body.save();
-  // }
+  static Future<List<dynamic>?> updateCustomer(
+      Customer uCustomer, String id) async {
+    final object = ParseObject('Customers');
+    object.objectId = id;
 
-  // static Future<List<ParseObject>> getCustomer() async {
-  //   QueryBuilder<ParseObject> queryTodo =
-  //   QueryBuilder<ParseObject>(ParseObject('customers'));
-  //   final ParseResponse apiResponse = await queryTodo.query();
+    object.set('firstName', uCustomer.firstName);
+    object.set('lastName', uCustomer.lastName);
+    object.set('phoneNumber', uCustomer.phoneNumber);
+    object.set('verificationCode', uCustomer.verificationCode);
+    object.set('discountCode', uCustomer.discountCode);
 
-  //   if (apiResponse.success && apiResponse.results != null) {
-  //     return apiResponse.results as List<ParseObject>;
-  //   } else {
-  //     return [];
-  //   }
-  // }
+    return BaseService.putRequest(object);
+  }
 
-  // static Future<void> updateCustomer(String objectId,Customer customer) async {
-  //   var body = ParseObject('customers')
-  //     ..objectId = objectId
-  //     ..set('firstName', customer.firstName)
-  //     ..set("lastName", customer.lastName)
-  //     ..set("phoneNumber", customer.phoneNumber)
-  //     ..set("verification", customer.verification)
-  //     ..set("discountCodes", customer.discountCodes)
-  //     ..set("code", customer.code)
-  //     ..set("createdAt", customer.createdAt)
-  //     ..set("updatedAt", customer.updatedAt);
+  static Future<List<dynamic>?> deleteCustomer(String id) async {
+    final object = ParseObject('Customers');
+    object.objectId = id;
 
-  //   await body.save();
-  // }
-
-  // static Future<void> deleteCustomer(String objectId) async {
-  //   var body = ParseObject('customers')..objectId = objectId;
-  //   await body.delete();
-  // }
+    return BaseService.deleteRequest(object);
+  }
 }

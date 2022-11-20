@@ -1,47 +1,43 @@
 import 'package:go_project/models/product.dart';
 import "package:parse_server_sdk/parse_server_sdk.dart";
 
+import 'base_service.dart';
+
 class ProductService {
-
-  static Future<void> saveProduct(Product product) async {
-    final body = ParseObject('products')
-      ..set('name', product.name)
-      ..set("barcode", product.barcode)
-      ..set("image", product.image)
-      ..set("price", product.price)
-      ..set("createdAt", product.createdAt)
-      ..set("updatedAt", product.updatedAt);
-    await body.save();
+  static Future<List<dynamic>?> getAllProducts() async {
+    return BaseService.getRequest('Products');
   }
 
-  static Future<List<ParseObject>> getProducts() async {
-    QueryBuilder<ParseObject> queryTodo =
-    QueryBuilder<ParseObject>(ParseObject('products'));
-    final ParseResponse apiResponse = await queryTodo.query();
+  static Future<List<dynamic>?> addProduct(Product newProduct) async {
+    final object = ParseObject('Products');
 
-    if (apiResponse.success && apiResponse.results != null) {
-      return apiResponse.results as List<ParseObject>;
-    } else {
-      return [];
-    }
+    object.set('name', newProduct.name);
+    object.set('barcode', newProduct.barcode);
+    object.set('brand', newProduct.brand);
+    object.set('image', newProduct.image);
+    object.set('price', newProduct.price);
+
+    return BaseService.postRequest(object);
   }
 
-  static Future<void> updateProduct(String objectId,Product product) async {
-    var body = ParseObject('products')
-      ..objectId = objectId
-      ..set('name', product.name)
-      ..set("barcode", product.barcode)
-      ..set("image", product.image)
-      ..set("price", product.price)
-      ..set("createdAt", product.createdAt)
-      ..set("updatedAt", product.updatedAt);
+  static Future<List<dynamic>?> updateProduct(
+      Product uProduct, String id) async {
+    final object = ParseObject('Products');
+    object.objectId = id;
 
-    await body.save();
+    object.set('name', uProduct.name);
+    object.set('barcode', uProduct.barcode);
+    object.set('brand', uProduct.brand);
+    object.set('image', uProduct.image);
+    object.set('price', uProduct.price);
+
+    return BaseService.putRequest(object);
   }
 
-  static Future<void> deleteProduct(String objectId) async {
-    var body = ParseObject('products')..objectId = objectId;
-    await body.delete();
-  }
+  static Future<List<dynamic>?> deleteProduct(String id) async {
+    final object = ParseObject('Products');
+    object.objectId = id;
 
+    return BaseService.deleteRequest(object);
+  }
 }
