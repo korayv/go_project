@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
 import 'package:go_project/design/app_theme_data.dart';
 import 'package:go_project/states/states.dart';
+import 'package:go_project/storage/storage.dart';
 import 'package:go_project/views/home.dart';
 import 'package:provider/provider.dart';
 
@@ -13,23 +14,14 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //backende connection kısmı
-  final keyApplicationId = 'q7wHH3k3GJtgQvfDJpIncqfR9O0pWtkk9V12GBDI';
-  final keyClientKey = 'O7o9rJmtLtj6BS1SsmcQzuWEoowUsdVLmVckTuAG';
-  final keyParseServerUrl = 'https://parseapi.back4app.com';
+  final SecureStorage secureStorage = SecureStorage();
+
+  const keyApplicationId = 'q7wHH3k3GJtgQvfDJpIncqfR9O0pWtkk9V12GBDI';
+  const keyClientKey = 'O7o9rJmtLtj6BS1SsmcQzuWEoowUsdVLmVckTuAG';
+  const keyParseServerUrl = 'https://parseapi.back4app.com';
 
   await Parse().initialize(keyApplicationId, keyParseServerUrl,
       clientKey: keyClientKey, debug: true);
-  //connection kısım bitiş
-
-  //Back4App için istek örneği ve çalışıyor kontrol ettim databasede yeni class-table oluşturmuş
-  var firstObject = ParseObject('FirstClass')
-    ..set(
-        'message', 'Hey ! First message from Flutter. Parse is now connected');
-  await firstObject.save();
-  print('done');
-  //Buraya kadar olan kısım istek atma kısmı
-
   runApp(
     ChangeNotifierProvider<States>(
       create: (BuildContext context) => States(),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:go_project/models/brand.dart';
+import 'package:go_project/services/brand_service.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import '../../design/app_colors.dart';
-
 
 class BrandsScreen extends StatefulWidget {
   const BrandsScreen({Key? key}) : super(key: key);
@@ -35,12 +36,55 @@ class _BrandsScreenState extends State<BrandsScreen> {
     }
   ];
 
+  TextEditingController brandNameController = TextEditingController();
+  TextEditingController brandLogoController = TextEditingController();
+  TextEditingController brandAdressController = TextEditingController();
+  TextEditingController branchController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController brandIdController = TextEditingController();
+
+  void addBrand() async {
+    if(brandNameController.text.isNotEmpty && brandLogoController.text.isNotEmpty && brandAdressController.text.isNotEmpty && branchController.text.isNotEmpty) {
+      Brand brandData = Brand(
+          name: brandNameController.text.toLowerCase(),
+          logo: brandLogoController.text.toLowerCase(),
+          adress: brandAdressController.text.toLowerCase(),
+          branch: branchController.text.toLowerCase(),
+          phoneNumber: phoneNumberController.text.toLowerCase(),
+          createdAt: "",
+          updatedAt: "",
+      );
+      BrandService.saveBrand(brandData);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          padding: EdgeInsets.all(0),
+          content: Text('Lütfen zorunlu alanları doldurunuz.'),
+          duration: Duration(milliseconds: 1500),
+          backgroundColor: AppColors.warning,
+        ),
+      );
+    }
+  }
+
+  void deleteBrand (String objectId) {
+    BrandService.deleteBrand(objectId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+/*          TextFormField(controller: brandNameController),
+          TextFormField(controller: brandLogoController),
+          TextFormField(controller: brandAdressController),
+          TextFormField(controller: branchController),
+          TextFormField(controller: phoneNumberController),
+          ElevatedButton(onPressed: addBrand, child: const Text("Gönder")),
+          TextFormField(controller: brandIdController),
+          ElevatedButton(onPressed: () {deleteBrand(brandIdController.text);}, child: const Text("Sil")),*/
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
