@@ -44,36 +44,36 @@ class _BrandsScreenState extends State<BrandsScreen> {
   TextEditingController brandIdController = TextEditingController();
 
   void getBrands() async {
-    BrandService.getBrands();
+    BrandService.getAllBrands();
   }
 
-  void addBrand() async {
-    if(brandNameController.text.isNotEmpty && brandLogoController.text.isNotEmpty && brandAdressController.text.isNotEmpty && branchController.text.isNotEmpty) {
-      Brand brandData = Brand(
-          name: brandNameController.text.toLowerCase(),
-          logo: brandLogoController.text.toLowerCase(),
-          adress: brandAdressController.text.toLowerCase(),
-          branch: branchController.text.toLowerCase(),
-          phoneNumber: phoneNumberController.text.toLowerCase(),
-          createdAt: "",
-          updatedAt: "",
-      );
-      BrandService.saveBrand(brandData);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          padding: EdgeInsets.all(0),
-          content: Text('Lütfen zorunlu alanları doldurunuz.'),
-          duration: Duration(milliseconds: 1500),
-          backgroundColor: AppColors.warning,
-        ),
-      );
-    }
-  }
+  // void addBrand() async {
+  //   if(brandNameController.text.isNotEmpty && brandLogoController.text.isNotEmpty && brandAdressController.text.isNotEmpty && branchController.text.isNotEmpty) {
+  //     Brand brandData = Brand(
+  //         name: brandNameController.text.toLowerCase(),
+  //         logo: brandLogoController.text.toLowerCase(),
+  //         adress: brandAdressController.text.toLowerCase(),
+  //         branch: branchController.text.toLowerCase(),
+  //         phoneNumber: phoneNumberController.text.toLowerCase(),
+  //         createdAt: "",
+  //         updatedAt: "",
+  //     );
+  //     BrandService.saveBrand(brandData);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         padding: EdgeInsets.all(0),
+  //         content: Text('Lütfen zorunlu alanları doldurunuz.'),
+  //         duration: Duration(milliseconds: 1500),
+  //         backgroundColor: AppColors.warning,
+  //       ),
+  //     );
+  //   }
+  // }
 
-  void deleteBrand (String objectId) {
-    BrandService.deleteBrand(objectId);
-  }
+  // void deleteBrand (String objectId) {
+  //   BrandService.deleteBrand(objectId);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,8 @@ class _BrandsScreenState extends State<BrandsScreen> {
                     children: [
                       OutlinedButton.icon(
                         onPressed: () => {},
-                        icon: const Icon(Icons.file_download_outlined, size: 20),
+                        icon:
+                            const Icon(Icons.file_download_outlined, size: 20),
                         label: const Text("İçe Aktar"),
                       ),
                       const SizedBox(width: 16),
@@ -145,9 +146,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
   }
 
   DataTable _createDataTable() {
-    return DataTable(
-        columns: _createColumns(),
-        rows: _createRows());
+    return DataTable(columns: _createColumns(), rows: _createRows());
   }
 
   List<DataColumn> _createColumns() {
@@ -212,38 +211,61 @@ class _BrandsScreenState extends State<BrandsScreen> {
   List<DataRow> _createRows() {
     return _brands
         .map((brands) => DataRow(
-      cells: [
-        DataCell(Text(brands['brand'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(brands['productName'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(brands['branch'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(brands['expiryDate'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(brands['usageCost'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(
-            Container(
-              decoration: BoxDecoration(
-                  color: AppColors.primary1,
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: AppColors.primary90)
-              ),
-              child: Row(
-                children: [
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: AppColors.primary90,)),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete, color: AppColors.primary90,)),
-                ],
-              ),
-            )),
-      ],
-      color: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
-              return AppColors.success90;
-            }
-            if (_brands.indexOf(brands).isEven) {
-              return AppColors.primary30;
-            }
-            return null;
-          }),
-    ))
+              cells: [
+                DataCell(Text(
+                  brands['brand'],
+                  style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
+                )),
+                DataCell(Text(
+                  brands['productName'],
+                  style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
+                )),
+                DataCell(Text(
+                  brands['branch'],
+                  style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
+                )),
+                DataCell(Text(
+                  brands['expiryDate'],
+                  style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
+                )),
+                DataCell(Text(
+                  brands['usageCost'],
+                  style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
+                )),
+                DataCell(Container(
+                  decoration: BoxDecoration(
+                      color: AppColors.primary1,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: AppColors.primary90)),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.edit,
+                            color: AppColors.primary90,
+                          )),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.delete,
+                            color: AppColors.primary90,
+                          )),
+                    ],
+                  ),
+                )),
+              ],
+              color: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return AppColors.success90;
+                }
+                if (_brands.indexOf(brands).isEven) {
+                  return AppColors.primary30;
+                }
+                return null;
+              }),
+            ))
         .toList();
   }
 }

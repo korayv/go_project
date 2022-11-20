@@ -1,4 +1,4 @@
-class Brand {
+class Distribution {
   String? objectId;
   String? name;
   String? logo;
@@ -8,7 +8,7 @@ class Brand {
   String? createdAt;
   String? updatedAt;
 
-  Brand({
+  Distribution({
     this.objectId,
     this.name,
     this.logo,
@@ -19,15 +19,15 @@ class Brand {
     this.updatedAt,
   });
 
-  // factory Brand.fromJson(Map<String, dynamic> json) => Brand(
-  //   name: json["name"] as String,
-  //   logo: json["logo"] as String,
-  //   adress: json["adress"] as String,
-  //   branch: json["branch"] as String,
-  //   phoneNumber: json["phoneNumber"] as String,
-  //   createdAt: json["createdAt"] as String,
-  //   updatedAt: json["updatedAt"] as String,
-  // );
+  // factory Distribution.fromJson(Map<String, dynamic> json) => Distribution(
+  //       name: json["name"] as String,
+  //       logo: json["logo"] as String,
+  //       adress: json["adress"] as String,
+  //       branch: json["branch"] as String,
+  //       phoneNumber: json["phoneNumber"] as String,
+  //       createdAt: json["createdAt"] as String,
+  //       updatedAt: json["updatedAt"] as String,
+  //     );
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,
