@@ -43,6 +43,10 @@ class _BrandsScreenState extends State<BrandsScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController brandIdController = TextEditingController();
 
+  void getBrands() async {
+    BrandService.getBrands();
+  }
+
   void addBrand() async {
     if(brandNameController.text.isNotEmpty && brandLogoController.text.isNotEmpty && brandAdressController.text.isNotEmpty && branchController.text.isNotEmpty) {
       Brand brandData = Brand(

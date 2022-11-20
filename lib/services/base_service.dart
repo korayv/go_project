@@ -5,6 +5,17 @@ class BaseService {
 
   static SecureStorage secureStorage = SecureStorage();
 
+  static const String _baseUrl = "https://parseapi.back4app.com/classes/";
+
+  static Future<void> initParse() async {
+    const keyApplicationId = 'q7wHH3k3GJtgQvfDJpIncqfR9O0pWtkk9V12GBDI';
+    const keyClientKey = 'O7o9rJmtLtj6BS1SsmcQzuWEoowUsdVLmVckTuAG';
+    const keyParseServerUrl = 'https://parseapi.back4app.com';
+
+    await Parse().initialize(keyApplicationId, keyParseServerUrl,
+        clientKey: keyClientKey, debug: true);
+  }
+
  /* Future<void> saveTodo(String title) async {
     final todo = ParseObject('Todo')..set('title', title)..set('done', false);
     await todo.save();

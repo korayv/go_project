@@ -15,11 +15,10 @@ class BrandService {
     await body.save();
   }
 
-  static Future<List<ParseObject>> getBrand() async {
-    QueryBuilder<ParseObject> queryTodo =
+  static Future<List<ParseObject>> getBrands() async {
+    QueryBuilder<ParseObject> queryBrands =
     QueryBuilder<ParseObject>(ParseObject('brands'));
-    final ParseResponse apiResponse = await queryTodo.query();
-
+    final ParseResponse apiResponse = await queryBrands.query();
     if (apiResponse.success && apiResponse.results != null) {
       return apiResponse.results as List<ParseObject>;
     } else {
