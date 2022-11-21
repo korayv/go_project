@@ -1,17 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_project/models/distribution.dart';
 
 import '../../design/app_colors.dart';
+import '../../services/distribution_service.dart';
 
-class SalesChannelsScreen extends StatefulWidget {
-  const SalesChannelsScreen({Key? key}) : super(key: key);
+class DistributionsScreen extends StatefulWidget {
+  const DistributionsScreen({Key? key}) : super(key: key);
 
   @override
-  State<SalesChannelsScreen> createState() => _SalesChannelsScreenState();
+  State<DistributionsScreen> createState() => _DistributionsScreenState();
 }
 
-class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
-  final List<Map> _salesChannels = [
+class _DistributionsScreenState extends State<DistributionsScreen> {
+  /*final List<Map> _salesChannels = [
     {
       'brand': "BP",
       'productName': '200 TL Restorant KART',
@@ -36,7 +38,26 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
       'sellingCount': '340',
       'totalSelling': '68,000 TL',
     },
-  ];
+  ];*/
+
+  final List<Distribution> distributions = [];
+
+  void getAllDistributions() {
+    DistributionService.getAllDistributions().then((value) => {
+      if (value != null){
+        for (var data in value){
+          distributions.add(Distribution.fromJson(data)),
+        },
+        if (mounted) setState(() {}),
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllDistributions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,15 +196,15 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
   }
 
   List<DataRow> _createRows() {
-    return _salesChannels
-        .map((salesChannels) => DataRow(
+    return distributions
+        .map((distribution) => DataRow(
       cells: [
-        DataCell(Text(salesChannels['brand'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(salesChannels['productName'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(salesChannels['barcode'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(salesChannels['deliveryCount'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(salesChannels['sellingCount'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
-        DataCell(Text(salesChannels['totalSelling'], style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['brand']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['productName']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['barcode']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['deliveryCount']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['sellingCount']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['totalSelling']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
         DataCell(
             Container(
               decoration: BoxDecoration(
@@ -204,7 +225,7 @@ class _SalesChannelsScreenState extends State<SalesChannelsScreen> {
             if (states.contains(MaterialState.selected)) {
               return AppColors.success90;
             }
-            if (_salesChannels.indexOf(salesChannels).isEven) {
+            if (distributions.indexOf(distribution).isEven) {
               return AppColors.primary30;
             }
             return null;

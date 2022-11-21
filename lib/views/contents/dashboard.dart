@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_project/design/app_colors.dart';
-import 'package:go_project/services/base_service.dart';
 import 'package:go_project/widgets/app_cards.dart';
+
+import '../../models/distribution.dart';
+import '../../services/distribution_service.dart';
 import '../../widgets/qr_generator_modal.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -38,7 +40,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
       'totalSelling': '34,000 TL',
     },
   ];
-  DateTimeRange dateRange = DateTimeRange(start: DateTime.now(), end: DateTime.now());
+  DateTimeRange dateRange =
+      DateTimeRange(start: DateTime.now(), end: DateTime.now());
+
+  final List<Distribution> distributions = [];
+
+  void getAllDistributions() {
+    DistributionService.getAllDistributions().then((value) => {
+      if (value != null){
+        for (var data in value){
+          distributions.add(Distribution.fromJson(data)),
+        },
+        if (mounted) setState(() {}),
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllDistributions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,38 +83,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   InkWell(
                     onTap: pickDateRange,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        // color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: AppColors.primary60)
-                      ),
+                          // color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: AppColors.primary60)),
                       child: Row(
                         children: [
-                          Text("${start.day}/${start.month}/${start.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.primary,),),
+                          Text(
+                            "${start.day}/${start.month}/${start.year}",
+                            style: const TextStyle(
+                              fontFamily: "Rubik",
+                              fontSize: 16,
+                              color: AppColors.primary,
+                            ),
+                          ),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primary, size: 16,)
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColors.primary,
+                            size: 16,
+                          )
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.calendar_month_outlined, color: AppColors.primary),
+                  const Icon(Icons.calendar_month_outlined,
+                      color: AppColors.primary),
                   const SizedBox(width: 8),
                   InkWell(
                     onTap: pickDateRange,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                           // color: AppColors.primary,
                           borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: AppColors.primary60)
-                      ),
+                          border: Border.all(color: AppColors.primary60)),
                       child: Row(
                         children: [
-                          Text("${end.day}/${end.month}/${end.year}", style: const TextStyle(fontFamily: "Rubik", fontSize: 16, color: AppColors.primary,)),
+                          Text("${end.day}/${end.month}/${end.year}",
+                              style: const TextStyle(
+                                fontFamily: "Rubik",
+                                fontSize: 16,
+                                color: AppColors.primary,
+                              )),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primary, size: 16,)
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColors.primary,
+                            size: 16,
+                          )
                         ],
                       ),
                     ),
@@ -199,14 +242,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future pickDateRange() async {
     DateTimeRange? newDateRange = await showDateRangePicker(
-        context: context,
-        initialDateRange: dateRange,
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2100),
-        saveText: "Değişiklikleri Kaydet",
+      context: context,
+      initialDateRange: dateRange,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      saveText: "Değişiklikleri Kaydet",
     );
 
-    if(newDateRange == null) return;
+    if (newDateRange == null) return;
     setState(() {
       dateRange = newDateRange;
     });
@@ -285,96 +328,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   List<DataRow> _createRows() {
-    return _dashboard
-        .map((dashboard) => DataRow(
-              cells: [
-                DataCell(
-                  Text(
-                    dashboard['brand'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    dashboard['productName'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    dashboard['barcode'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    dashboard['deliveryCount'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    dashboard['sellingCount'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Text(
-                    dashboard['totalSelling'],
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                DataCell(
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primary1,
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: AppColors.primary90),
-                    ),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.edit_outlined,
-                            color: AppColors.primary90,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.delete_outline,
-                            color: AppColors.primary90,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-              color: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return AppColors.success90;
-                }
-                if (_dashboard.indexOf(dashboard).isEven) {
-                  return AppColors.primary30;
-                }
-                return null;
-              }),
-            ))
+    return distributions
+        .map((distribution) => DataRow(
+      cells: [
+        DataCell(Text("salesChannels['brand']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['productName']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['barcode']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['deliveryCount']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['sellingCount']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(Text("salesChannels['totalSelling']", style: const TextStyle(fontFamily: "Rubik",fontSize: 16),)),
+        DataCell(
+            Container(
+              decoration: BoxDecoration(
+                  color: AppColors.primary1,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: AppColors.primary90)
+              ),
+              child: Row(
+                children: [
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: AppColors.primary90,)),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete, color: AppColors.primary90,)),
+                ],
+              ),
+            )),
+      ],
+      color: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return AppColors.success90;
+            }
+            if (distributions.indexOf(distribution).isEven) {
+              return AppColors.primary30;
+            }
+            return null;
+          }),
+    ))
         .toList();
   }
 }

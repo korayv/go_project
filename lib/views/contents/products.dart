@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_project/models/product.dart';
 
 import '../../design/app_colors.dart';
+import '../../services/product_service.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -36,6 +38,26 @@ class _ProductsScreenState extends State<ProductsScreen> {
       'date': '22.10.22',
     },
   ];
+
+  final List<Product> products = [];
+
+  void getAllProducts() {
+    ProductService.getAllProducts().then((value) => {
+      if (value != null){
+        for (var data in value){
+          products.add(Product.fromJson(data)),
+        },
+        if (mounted) setState(() {}),
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,31 +197,31 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   List<DataRow> _createRows() {
-    return _products
-        .map((products) => DataRow(
+    return products
+        .map((product) => DataRow(
               cells: [
                 DataCell(Text(
-                  products['productName'],
+                  product.name.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  products['barcode'],
+                  product.barcode.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  products['branch'],
+                  "products['branch']",
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  products['productCount'],
+                  "products['productCount']",
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  products['cost'],
+                  product.price.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  products['date'],
+                  product.createdAt.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Container(
@@ -230,7 +252,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 if (states.contains(MaterialState.selected)) {
                   return AppColors.success90;
                 }
-                if (_products.indexOf(products).isEven) {
+                if (products.indexOf(product).isEven) {
                   return AppColors.primary30;
                 }
                 return null;

@@ -1,3 +1,5 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 import 'discount_code.dart';
 
 class Customer {
@@ -7,8 +9,8 @@ class Customer {
   String? phoneNumber;
   String? verificationCode;
   DiscountCode? discountCode;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   Customer({
     this.objectId,
@@ -21,16 +23,16 @@ class Customer {
     this.updatedAt,
   });
 
-  // factory Customer.fromJson(Map<String, dynamic> json) => Customer(
-  //       firstName: json["firstName"] as String,
-  //       lastName: json["lastName"] as String,
-  //       phoneNumber: json["phoneNumber"] as String,
-  //       verification: json["verification"] as bool,
-  //       discountCodes: json["discountCodes"] as Map<String, dynamic>,
-  //       code: json["code"] as String,
-  //       createdAt: json["createdAt"] as String,
-  //       updatedAt: json["updatedAt"] as String,
-  //     );
+  factory Customer.fromJson(ParseObject json) => Customer(
+        objectId: json["objectId"] as String,
+        firstName: json["firstName"] as String,
+        lastName: json["lastName"] as String,
+        phoneNumber: json["phoneNumber"] as String,
+        verificationCode: json["verificationCode"] as String,
+        discountCode: json["discountCode"] != null ? DiscountCode.fromJson(json["discountCode"]) : null,
+        createdAt: json["createdAt"] as DateTime,
+        updatedAt: json["updatedAt"] as DateTime,
+      );
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,

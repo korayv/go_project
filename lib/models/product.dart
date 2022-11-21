@@ -1,3 +1,5 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 import 'brand.dart';
 
 class Product {
@@ -6,9 +8,9 @@ class Product {
   String? barcode;
   Brand? brand;
   String? image;
-  double? price;
-  String? createdAt;
-  String? updatedAt;
+  int? price;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   Product({
     this.objectId,
@@ -21,14 +23,17 @@ class Product {
     this.updatedAt,
   });
 
-  // factory Product.fromJson(Map<String, dynamic> json) => Product(
-  //       name: json["name"] as String,
-  //       barcode: json["barcode"] as String,
-  //       image: json["image"] as String,
-  //       price: json["price"] as double,
-  //       createdAt: json["createdAt"] as String,
-  //       updatedAt: json["updatedAt"] as String,
-  //     );
+  factory Product.fromJson(ParseObject json) => Product(
+        objectId: json["objectId"] as String,
+        name: json["name"] as String,
+        barcode: json["barcode"] as String,
+        // brand: json["brand"] != null ? Brand.fromJson(json["brand"]) : null,
+        brand: null,
+        image: json["image"] as String,
+        price: json["price"] as int,
+        createdAt: json["createdAt"] as DateTime,
+        updatedAt: json["updatedAt"] as DateTime,
+      );
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,

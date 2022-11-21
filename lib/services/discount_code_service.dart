@@ -9,13 +9,13 @@ class DiscountCodeService {
   }
 
   static Future<List<dynamic>?> addDiscountCode(
-      DiscountCode newDiscountCode) async {
+      DiscountCode newDiscountCode, String brandId, String productId) async {
     final object = ParseObject('DiscountCodes');
 
     object.set('discountCode', newDiscountCode.discountCode);
     object.set('discountAmount', newDiscountCode.discountAmount);
-    object.set('brand', newDiscountCode.brand);
-    object.set('product', newDiscountCode.product);
+    object.set('brand', ParseObject('Brands')..objectId = brandId);
+    object.set('product', ParseObject('Products')..objectId = productId);
     object.set('customer', newDiscountCode.customer);
 
     return BaseService.postRequest(object);

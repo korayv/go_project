@@ -1,3 +1,5 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 import 'customer.dart';
 import 'product.dart';
 import 'brand.dart';
@@ -23,15 +25,16 @@ class DiscountCode {
     this.updatedAt,
   });
 
-  // factory DiscountCode.fromJson(Map<String, dynamic> json) => DiscountCode(
-  //       discountCode: json["discountCode"] as String,
-  //       discountAmount: json["discountAmount"] as double,
-  //       brand: json["brand"] as String,
-  //       product: json["product"] as String,
-  //       customer: json["customer"] as String,
-  //       createdAt: json["createdAt"] as String,
-  //       updatedAt: json["updatedAt"] as String,
-  //     );
+  factory DiscountCode.fromJson(ParseObject json) => DiscountCode(
+        objectId: json["objectId"] as String,
+        discountCode: json["discountCode"] as String,
+        discountAmount: json["discountAmount"] as double,
+        brand: Brand.fromJson(json["brand"]),
+        product: Product.fromJson(json["product"]),
+        customer: Customer.fromJson(json["customer"]),
+        createdAt: json["createdAt"] as String,
+        updatedAt: json["updatedAt"] as String,
+      );
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,

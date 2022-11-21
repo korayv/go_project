@@ -1,3 +1,5 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 class Brand {
   String? objectId;
   String? name;
@@ -5,8 +7,8 @@ class Brand {
   String? address;
   String? branch;
   String? phoneNumber;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   Brand({
     this.objectId,
@@ -19,15 +21,16 @@ class Brand {
     this.updatedAt,
   });
 
-  // factory Brand.fromJson(Map<String, dynamic> json) => Brand(
-  //   name: json["name"] as String,
-  //   logo: json["logo"] as String,
-  //   adress: json["adress"] as String,
-  //   branch: json["branch"] as String,
-  //   phoneNumber: json["phoneNumber"] as String,
-  //   createdAt: json["createdAt"] as String,
-  //   updatedAt: json["updatedAt"] as String,
-  // );
+  factory Brand.fromJson(ParseObject json) => Brand(
+        objectId: json["objectId"] as String,
+        name: json["name"] as String,
+        logo: json["logo"] as String,
+        address: json["address"] as String,
+        branch: json["branch"] as String,
+        phoneNumber: json["phoneNumber"] as String,
+        createdAt: json["createdAt"] as DateTime,
+        updatedAt: json["updatedAt"] as DateTime,
+      );
 
   Map<String, dynamic> toJson() => {
         "objectId": objectId,

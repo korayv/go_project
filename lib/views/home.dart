@@ -1,10 +1,12 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:go_project/views/contents/Brands.dart';
-import 'package:go_project/views/contents/Customers.dart';
-import 'package:go_project/views/contents/Dashboard.dart';
+import 'package:go_project/models/distribution.dart';
+import 'package:go_project/services/distribution_service.dart';
 import 'package:go_project/views/contents/Products.dart';
-import 'package:go_project/views/contents/SalesChannels.dart';
+import 'package:go_project/views/contents/brands.dart';
+import 'package:go_project/views/contents/customers.dart';
+import 'package:go_project/views/contents/dashboard.dart';
+import 'package:go_project/views/contents/distributions.dart';
 import 'package:provider/provider.dart';
 
 import '../design/app_colors.dart';
@@ -51,7 +53,7 @@ class _RightSideState extends State<RightSide> {
     DashboardScreen(),      //0
     ProductsScreen(),      //1
     CustomersScreen(),     //2
-    SalesChannelsScreen(), //3
+    DistributionsScreen(), //3
     BrandsScreen(),        //4
   ];
 

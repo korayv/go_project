@@ -12,7 +12,7 @@ class BrandsScreen extends StatefulWidget {
 }
 
 class _BrandsScreenState extends State<BrandsScreen> {
-  final List<Map> _brands = [
+  /*final List<Map> _brands = [
     {
       'brand': "lc waikiki",
       'productName': '100 TL FASHION KART',
@@ -34,7 +34,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
       'expiryDate': "22.10.22",
       'usageCost': '350 TL',
     }
-  ];
+  ];*/
 
   TextEditingController brandNameController = TextEditingController();
   TextEditingController brandLogoController = TextEditingController();
@@ -43,9 +43,9 @@ class _BrandsScreenState extends State<BrandsScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController brandIdController = TextEditingController();
 
-  void getBrands() async {
+  /*void getBrands() async {
     BrandService.getAllBrands();
-  }
+  }*/
 
   // void addBrand() async {
   //   if(brandNameController.text.isNotEmpty && brandLogoController.text.isNotEmpty && brandAdressController.text.isNotEmpty && branchController.text.isNotEmpty) {
@@ -74,6 +74,25 @@ class _BrandsScreenState extends State<BrandsScreen> {
   // void deleteBrand (String objectId) {
   //   BrandService.deleteBrand(objectId);
   // }
+
+  final List<Brand> brands = [];
+
+  void getAllBrands() {
+    BrandService.getAllBrands().then((value) => {
+      if (value != null){
+        for (var data in value){
+          brands.add(Brand.fromJson(data)),
+        },
+        if (mounted) setState(() {}),
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllBrands();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,27 +228,27 @@ class _BrandsScreenState extends State<BrandsScreen> {
   }
 
   List<DataRow> _createRows() {
-    return _brands
-        .map((brands) => DataRow(
+    return brands
+        .map((brand) => DataRow(
               cells: [
                 DataCell(Text(
-                  brands['brand'],
+                  brand.name.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  brands['productName'],
+                  "brands['productName']",
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  brands['branch'],
+                  brand.branch.toString(),
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  brands['expiryDate'],
+                  "brands['expiryDate']",
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Text(
-                  brands['usageCost'],
+                  "brands['usageCost']",
                   style: const TextStyle(fontFamily: "Rubik", fontSize: 16),
                 )),
                 DataCell(Container(
@@ -260,7 +279,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                 if (states.contains(MaterialState.selected)) {
                   return AppColors.success90;
                 }
-                if (_brands.indexOf(brands).isEven) {
+                if (brands.indexOf(brand).isEven) {
                   return AppColors.primary30;
                 }
                 return null;

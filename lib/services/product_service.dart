@@ -8,12 +8,13 @@ class ProductService {
     return BaseService.getRequest('Products');
   }
 
-  static Future<List<dynamic>?> addProduct(Product newProduct) async {
+  static Future<List<dynamic>?> addProduct(
+      Product newProduct, String brandId) async {
     final object = ParseObject('Products');
 
     object.set('name', newProduct.name);
     object.set('barcode', newProduct.barcode);
-    object.set('brand', newProduct.brand);
+    object.set('brand', ParseObject('Brands')..objectId = brandId);
     object.set('image', newProduct.image);
     object.set('price', newProduct.price);
 
